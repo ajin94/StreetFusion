@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='res/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='res/css/main.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='res/css/custom_signup_page.css')}}">
+    <title>{% block page_title %} {% endblock %}</title>
+</head>
+<body>
+<div class="container-fluid signup-main">
+    <div class="row py-5 d-flex justify-content-center">
+        <div class="col-md-5 col-sm-11 col-xs-12 pl-md-5 pt-5 mb-4" style="background-color:#ffffffe6;">
+            {% block client_body %} {% endblock %}
+        </div>
+    </div>
+</div>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+		var csrf_token = "{{ csrf_token() }}";
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader("X-CSRFToken", csrf_token);
+				}
+			}
+		});
+</script>
+{% block custom_script %} {% endblock %}
+</body>
+</html>
